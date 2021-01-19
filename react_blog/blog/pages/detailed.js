@@ -8,7 +8,8 @@ import {Row,Col,Breadcrumb,Affix} from 'antd'
 
 import marked from 'marked'
 import hljs from 'highlight.js'
-// import 'highlight.js/styles/monokai-sublime.css'
+import 'highlight.js/styles/monokai-sublime.css'
+import Tocify from '../components/tocify.tsx'
 
 import {
   ReconciliationOutlined,
@@ -19,6 +20,7 @@ import Header from '../components/Header'
 import Advert from '../components/Advert'
 import Footer from '../components/Footer'
 
+//tocify.tsx
 
 const Detailed=(props)=>{
   // let markdown='# P01:课程介绍和环境搭建\n' +
@@ -55,7 +57,14 @@ const Detailed=(props)=>{
   // '>> bbbbbbbbb\n' +
   // '>>> cccccccccc\n\n'+
   // '``` var a=11; ```'
+  const tocify = new Tocify()
   const renderer = new marked.Renderer()
+  
+  renderer.heading=function(text,level,raw){
+    const anchor = tocify.add(text,level)
+    return `<a id="${anchor}" href="#${anchor}" class="anchor-fix"><h${level}>${text}</h${levvel}></a>\n`
+  }
+  
   marked.setOptions({
     renderer:renderer, //渲染的方式
     gfm:true,  //启动类似github样式的makdown
@@ -118,6 +127,7 @@ const Detailed=(props)=>{
                     source={markdown}
                     ordered={false}
                   /> */}
+                  {tocify && tocify.render()}
                 </div>
               </Affix>
           </Col>
