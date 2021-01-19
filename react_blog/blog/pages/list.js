@@ -40,7 +40,12 @@ const Mylist=()=>{
                 dataSource={mylist}
                 renderItem={item=>(
                   <List.Item>
-                      <div className="title">{item.title}</div>
+                      <div className="title">
+                        {item.title}
+                        {/* <Link href={{pathname:'/detailed',query:{id:item.id}}}>
+                            <a>{item.title}</a>
+                        </Link> */}
+                      </div>
                       <div className="icon">
                       <span> <ReconciliationOutlined /> 2021-01-15</span>
                       <span> <ReconciliationOutlined /> 视频教程</span>
@@ -52,7 +57,8 @@ const Mylist=()=>{
               />
           </Col>
           <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
-            
+              <Author />
+              <Advert />
           </Col>
       </Row>
       <Footer />

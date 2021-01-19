@@ -9,41 +9,68 @@
 // xl: ≥1200px响应式栅格.
 // xxl: ≥1600px响应式栅格.
 
-import React from 'react'
+import React ,{useState,useEffect} from 'react'
 import style from '../static/style/components/header.module.css'
 import {Row,Col,Menu} from 'antd'
 // 横向部件 Row 纵向部件 Col 
+import Router from 'next/router'
+import Link from 'next/link'
+import axios from 'axios'
+import servicePath from '../config/apiUrl'
 
 import { createFromIconfontCN } from '@ant-design/icons';
 const Icon = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_2328986_gi7falcj2ya.js',
 });
 
-const Header=()=>(
+const Header=()=>{
+    const [navArray,setNavArray] = useState([])
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            const result = await axios(servicePath.getTypeInfo).then((res)=>{
+                return res.data.data
+            })
+            setNavArray(result)
+        }
+        fetchData()
+    },[])
+
+    const handleClick = (e)=>{
+        if(e.key==0){
+            Router.push('/')
+        }else{
+            Router.push('/list?id='+e.key)
+        }
+    }
+
+    return (
     <div className={style.header}>
         <Row type="flex" justify='center'>
             <Col xs={24} sm={24} md={10} lg={15} xl={12}>
                 <span className={style.logo}>技术胖</span>
                 <span className={style.txt}>专注前端开发，每年100集免费视频。</span>
             </Col>
-            <Col xs={0} sm={0} md={14} lg={8} xl={6}>
-                <Menu mode="horizontal">
-                    <Menu.Item key="home"  >
+            <Col xs={6} sm={6} md={14} lg={8} xl={10}>
+                <Menu mode="horizontal" onClick={handleClick}>
+                    <Menu.Item key="0"  >
                         <Icon type="icon-home-filling"/>
                         首页
                     </Menu.Item>
-                    <Menu.Item key="video">
-                        <Icon type="icon-shipin"/>
-                        视频
-                    </Menu.Item>
-                    <Menu.Item key="life">
-                        <Icon type="icon-camera"/>
-                        生活
-                    </Menu.Item>
+                    {
+                        navArray.map((item)=>{
+                            return (
+                                <Menu.Item key={item.id}>
+                                    <Icon type={item.icon}/>
+                                    {item.typeName}
+                                </Menu.Item>
+                            )
+                        })
+                    }
+
                 </Menu>
             </Col>
         </Row>
     </div>
 )
-
+}
 export default Header

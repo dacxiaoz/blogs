@@ -3,6 +3,8 @@ import axios from 'axios'
 import Head from 'next/head'
 import Link from 'next/link'
 import {Row,Col,List} from 'antd'
+import servicePath from '../config/apiUrl'
+
 import {
   ReconciliationOutlined,
 } from '@ant-design/icons';
@@ -56,7 +58,7 @@ const Home=(list)=>{
 
 Home.getInitialProps = async ()=>{
   const promise = new Promise((resolve)=>{
-    axios('http://127.0.0.1:7001/default/getArticlelist').then(
+    axios(servicePath.getArticlelist).then(
       (res)=>{
         resolve(res.data)
       }
