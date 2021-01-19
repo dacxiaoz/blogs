@@ -233,7 +233,6 @@ Detailed.getInitialProps = async(context)=>{
   const promise = new Promise((resolve)=>{
     axios(servicePath.getArticleById+id).then(
       (res)=>{
-        console.log(res.data.data[0])
         resolve(res.data.data[0])
       }
     )
