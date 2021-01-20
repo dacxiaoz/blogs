@@ -55,7 +55,6 @@ class HomeController extends Controller {
     this.ctx.body={data:results}
   }
 }
-
 module.exports = HomeController;
 
 //RESTful 最流行的网络应用程序设计风格和开发方式 接口设计风格
