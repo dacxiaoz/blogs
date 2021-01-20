@@ -6,5 +6,4 @@ let servicePath = {
     getTypeInfo : ipUrl+'getTypeInfo',  //文章类别接口
     getListById : ipUrl+'getListById/',  //根据类别ID获得文章列表
 }
-
 export default servicePath
