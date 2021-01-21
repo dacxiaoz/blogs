@@ -1,7 +1,7 @@
 import React,{ useState } from 'react'
 import 'antd/dist/antd.css'
 import { Card,Input,Button,Spin } from 'antd'
-
+import '../static/css/Login.css'
 import {
     UserAddOutlined,
     KeyOutlined
