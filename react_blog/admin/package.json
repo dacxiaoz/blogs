@@ -11,6 +11,7 @@
     "core-js": "^3.8.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
@@ -25,10 +26,10 @@
       "react-app",
       "react-app/jest"
     ],
-    "rules" : {
-      "no-undef" :  "off" ,
-      "no-restricted-globals" :  "off" ,
-      "no-unused-vars" :  "off"
+    "rules": {
+      "no-undef": "off",
+      "no-restricted-globals": "off",
+      "no-unused-vars": "off"
     }
   },
   "browserslist": {
