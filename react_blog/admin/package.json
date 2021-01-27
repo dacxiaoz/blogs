@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
     "antd": "^4.10.3",
+    "axios": "^0.21.1",
     "core-js": "^3.8.3",
     "highlight.js": "^10.5.0",
     "marked": "^1.2.7",

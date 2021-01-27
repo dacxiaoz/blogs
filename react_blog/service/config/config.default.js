@@ -42,15 +42,15 @@ module.exports = appInfo => {
     agent: false,
   };
   config.security = {
-    scrf:{
+    csrf:{
       enable:false
     }, //egg提供的安全机制
     domainWhiteList:['*']
   };
   config.cors={
-    origin:'*' ,//允许哪些域名可以跨域访问
+    origin:'http://localhost:3000' ,//允许哪些域名可以跨域访问
     allowMethods:'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS', //允许哪些请求可以跨域
-    credentials: true
+    credentials: true //允许Cookis可以跨域
   };
   return {
     ...config,
