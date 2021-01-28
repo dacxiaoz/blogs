@@ -1,8 +1,9 @@
 import React,{useState} from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import '../static/css/AdminIndex.css'
-import {Route} from 'react-router-dom'
+import {Route,useHistory} from 'react-router-dom'
 import AddArticle from './AddArticle'
+import ArticleList from './ArticleList'
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -13,13 +14,20 @@ import {
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-function AdminIndex(){
+function AdminIndex(props){
     const [collapsed,setCollapsed] = useState(false)
-
+    let history = useHistory();
     const onCollapse = collapsed => {
         setCollapsed(collapsed)
     };
-
+    const handleClickArticle = e=>{
+        
+        if(e.key==='addArticle'){
+            history.push("/index/add")
+        }else{
+            history.push("/index/list")
+        }
+    }
     return (
         <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
@@ -31,9 +39,9 @@ function AdminIndex(){
             <Menu.Item key="2" icon={<DesktopOutlined />}>
                 添加文章
             </Menu.Item>
-            <SubMenu key="sub1" icon={<UserOutlined />} title="文章管理">
-                <Menu.Item key="3">添加文章</Menu.Item>
-                <Menu.Item key="4">文章列表</Menu.Item>
+            <SubMenu key="sub1" icon={<UserOutlined />} title="文章管理" onClick={handleClickArticle}>
+                <Menu.Item key="addArticle">添加文章</Menu.Item>
+                <Menu.Item key="articleList">文章列表</Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<UserOutlined />} title="用户管理">
                 <Menu.Item key="5">用户列表</Menu.Item>
@@ -53,7 +61,10 @@ function AdminIndex(){
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                 <div>
-                    <Route path='/index' exact component={AddArticle} />
+                    <Route path='/index/' exact component={AddArticle} />
+                    <Route path='/index/add' exact component={AddArticle} />
+                    <Route path='/index/list/' exact component={ArticleList} />
+                    <Route path='/index/add/:id' exact component={AddArticle} /> 
                 </div>
                 博客管理系统
             </div>
